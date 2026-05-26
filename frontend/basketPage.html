@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/main.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--НАЧАЛО ШАПКИ-->
+    <header class="header">
+      <div class="header__background">
+        <div class="container">
+          <a href="index.html" class="header__logo-block">
+            <img
+              src="photos/svg/icon_dumbbell.svg"
+              class="header__logo"
+              alt="лого"
+            />
+            <p class="header__title">SPORTGEAR</p>
+          </a>
+
+          <nav class="header__nav">
+            <ul class="header__list">
+              <li>
+                <a href="categoryPage.html" class="header__link">Категории</a>
+              </li>
+              <li><a href="aboutPage.html" class="header__link">О нас</a></li>
+              <li>
+                <a href="contactPage.html" class="header__link">Контакты</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="header__icons">
+            <img
+              src="photos/svg/поиск.svg"
+              class="header__icon"
+              id="searchHeader"
+              alt="поиск"
+            />
+            <a href="basketPage.html"
+              ><img
+                src="photos/svg/коризна.svg"
+                class="header__icon"
+                alt="коризна"
+            /></a>
+            <img
+              src="photos/svg/бургер.svg"
+              class="header__icon header__burger"
+              id="burgerBtn"
+              alt="бургер"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--КОНЕЦ ШАПКИ-->
+    <div class="container container-basket">
+      <main class="main-basket">
+        <h1>Корзина</h1>
+        <p class="basket-empty" id="basket-empty">Корзина пуста</p>
+        <ul class="basket-list"></ul>
+
+        <div class="order-info">
+          <p class="total-product"></p>
+          <hr />
+          <p class="total-price"></p>
+          <button id="make-order">Сделать заказ</button>
+        </div>
+      </main>
+    </div>
+    <div class="basket-form">
+      <form class="deliviry-form">
+        <div class="form__pole">
+          <label>ФИО</label>
+          <input type="text" placeholder="Иван Иванов" required />
+        </div>
+        <div class="form__pole">
+          <label>Ваша почта</label>
+          <input type="text" placeholder="example@gmail.com" required />
+        </div>
+        <div class="form__pole">
+          <label>Номер телефона</label>
+          <input type="text" placeholder="+3752911111" required />
+        </div>
+        <div class="form__pole" id="adress">
+          <label>Адресс</label>
+          <input type="text" placeholder="ул.Свердлова 13а" required />
+        </div>
+        <div class="form__pole">
+          <label>Страна</label>
+          <input type="text" placeholder="Беларусь" required />
+        </div>
+        <div class="form__pole">
+          <label>Город</label>
+          <input type="text" placeholder="Минск" required />
+        </div>
+
+        <div class="form__pole">
+          <button id="chanel" type="button">Омтена</button>
+        </div>
+        <div class="form__pole">
+          <button id="order" type="submit">Заказать</button>
+        </div>
+      </form>
+    </div>
+    <!--ФУТЕР-->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__top">
+          <div class="footer__logo">
+            <img src="photos/svg/icon_dumbbell.svg" alt="лого" />
+            <h3>SPORTGEAR</h3>
+            <p>Лучшее спортивное снаряжение для вашего прогресса</p>
+          </div>
+
+          <div class="footer__contact">
+            <h5>Контакты</h5>
+            <p>Телефон: +375-29-222-2222</p>
+            <p>Email: support_sportgear@gmail.com</p>
+            <p>Время работы: Пн-Вс 9:00-21:00</p>
+          </div>
+        </div>
+        <hr />
+        <p class="footer__letter">© 2026 SPORTGEAR . Все права защищены</p>
+      </div>
+    </footer>
+    <!--ФУТЕР-->
+
+    <div id="search-blur">
+      <div class="search">
+        <div class="search__input-block">
+          <img src="photos/svg/поиск.svg" alt="поиск" />
+          <input placeholder="Название товара" id="src-input" />
+          <button class="search__close" id="close-search">&times;</button>
+        </div>
+
+        <div class="search__content" id="element-to-insert"></div>
+      </div>
+    </div>
+
+    <script type="module" src="JavaScript/main.js"></script>
+    <script type="module" src="JavaScript/basket.js"></script>
+  </body>
+</html>

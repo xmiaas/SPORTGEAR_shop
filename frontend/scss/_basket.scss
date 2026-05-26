@@ -1,0 +1,231 @@
+.container-basket {
+  width: 100%;
+ 
+}
+.main-basket { 
+    @include tablet {
+        flex-direction: column; 
+        padding: 20px 0;
+        .basket-list {
+            overflow: visible;
+            flex: none;
+            width: 100%;
+        }
+        .order-info {
+           
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    @include mobile {
+        gap: 20px;
+        h1 {
+            font-size: 24px;
+        }
+    }
+    
+    padding: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+    h1 {
+        width: 100%;
+    }
+    .basket-list {
+        display:flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex: 2;
+        gap: 20px;
+        overflow-y: auto;
+        li {
+            width: 100%;
+        }
+    }
+    .order-info {
+        flex:1;
+        background-color: rgba(239, 238, 238, 1);
+        padding:26px;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        button {
+            
+            width: 100%;
+            height: 43px;
+            background-color: rgba(44, 44, 44, 1);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: "InterR";
+            font-size: 16px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(34, 34, 34);
+            }
+        }
+    }
+}
+
+.product-template__basket {
+    @include mobile {
+        padding: 10px;
+        .product-img {
+            width: 50px;
+            height: 50px;
+        }
+        .product-name {
+            font-size: 14px;
+        }
+    }
+    position: relative;
+    border: 1px solid #f0f0f0;
+    padding: 15px;
+    border-radius: 20px;
+    &:hover {
+        border-color: #fb923c;
+    }
+    .product-name {
+        font-size: 16px;       
+    }
+    .cat {
+        font-size: 13px;
+    }
+    .product-price {
+        font-size: 16px; 
+        }
+    .product-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+        }   
+    .product-remove {
+        margin-left: 10px;
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: 0.2s;
+        }
+            .product-remove:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+}
+
+.basket-form {
+    display: none;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;   
+    height: 100vh; 
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: brightness(0.8);
+    z-index: 10001;
+}
+.basket-empty {
+  color: $grayText;
+  font-size: 1.25rem;
+  display:flex;
+  width: 100%;
+  text-align: center;
+  
+}
+.deliviry-form {
+    @include tablet {
+        width: 90%;
+        top: 100px; 
+    }
+
+    @include mobile {
+        top: 50px;
+        padding: 15px;
+        gap: 15px;
+
+        .form__pole {
+            flex: 1 1 100%; 
+        }
+        
+    }
+    border-radius: 10px;
+    max-width: 680px;
+    z-index: 10003;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: absolute;
+    top: 150px;
+   
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+   
+    button {
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        border: none;
+    }
+    #chanel { 
+        background-color: white;
+        border: 1px #f0f0f0 solid;
+        &:hover { 
+            border: 1px solid #e0e0e0 ;
+        }
+    }
+    #order {
+        background-color: rgba(44, 44, 44, 1);
+        color: white;
+        &:hover {
+                background-color: rgb(34, 34, 34);
+            }
+    }
+    .form__pole {
+        display:flex;
+        flex-direction: column;
+        flex: 0 1 calc(50% - 15px);
+        gap: 8px;
+                    
+        label {
+            font-size: 16px;
+        }
+        input {
+            border: 1px solid rgba(217, 217, 217, 1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            }
+        
+        
+        }
+        #adress {
+            flex: 1 1 100%; 
+            max-width: 100%; 
+        }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

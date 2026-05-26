@@ -1,0 +1,91 @@
+.footer {
+    
+    margin-top: auto;
+    border: 1px solid rgba(0,0,0,0.1);
+    min-height: 150px;
+    padding-top:20px;
+    p {
+        font-size: clamp(11px, 0.7vw, 12px);
+        color: $grayText;
+    }
+    &__top {
+        
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap:20px;
+        
+    }
+    &__contact {
+        h5 {
+            
+            font-size: clamp(14px, 1vw, 16px);
+        }
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        p {
+            color: $grayText;
+        }
+        
+    } 
+    &__logo { 
+        max-width: 250px;
+        display: flex;
+        align-items: center;
+        gap:16px;
+        flex-wrap: wrap;
+        img {
+        max-width: 40px;
+        max-height: 40px;
+    }
+    h3 { 
+        
+        font-size: clamp(18px, 1.2vw, 20px);
+    }
+    
+    }
+
+    hr { 
+        margin-top: 20px;
+        margin-bottom: 0;
+        width: 100%;
+        border: 0;
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    &__letter{ 
+        text-align: center;
+        margin: 12px 0;
+    }
+
+
+    
+    @include mobile {
+    text-align: center;
+    padding: 20px 16px;
+
+    &__top {
+        flex-direction: column; 
+        align-items: center;
+        gap: 16px; 
+    }
+
+    &__logo {
+        justify-content: center;
+        text-align: center;
+    }
+
+    &__contact {
+        align-items: center;
+    }
+
+    &__letter {
+        font-size: 11px;
+    }
+
+    p {
+        font-size: 11px;
+    }
+    }
+}

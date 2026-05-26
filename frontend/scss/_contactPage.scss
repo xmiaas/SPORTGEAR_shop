@@ -1,0 +1,170 @@
+.main-contact {
+    margin-bottom: 53px;
+    .hero {
+        background-color: $lightOrange;
+        margin-top:-64px;
+        padding-top: 103px;  
+        height: 346px;
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            text-align: center;
+            h1 {
+                font-size: 36px;
+                color: white;
+            } 
+            p {
+                font-size: 16px;
+                color: white;
+                max-width: 635px;
+                padding-bottom: 39px;
+            }
+        }
+        @include mobile {
+            padding-bottom: 30px;
+
+            .container {
+                h1 { font-size: 26px; }
+                p { font-size: 14px; padding-bottom: 0; }
+            }
+        }
+    }
+    .container__inf {
+        padding-top: 60px;
+        display:flex;
+        gap: 80px;
+
+        @include tablet {
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        @include mobile {
+            padding-top: 30px;
+        }
+
+        .contact-inf {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            max-width: 380px;
+            &__text {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+                h3 { 
+                font-size: calm(18px,2vw,24px);
+                }
+                p { 
+                    font-size: calm(8px,0.7vw,12px);
+                    color: $grayText;
+                }
+            }
+
+            &__block { 
+                display: flex;
+                flex-direction: column;
+                padding-top: 35px;
+                gap: 20px;
+            }
+            &__item {
+                display: flex;
+                gap: 10px;
+                img { 
+                    width: 50px;
+                    height: 50px;
+                }
+                &__txt { 
+                    display: flex; 
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    p {
+                        font-size: calm(12px,1vw,16px);
+                        &:nth-last-child(1) {
+                            color: $grayText;
+                        }
+                    }
+                    
+                }
+            }
+            @include tablet {
+                max-width: 100%;
+            }
+        }
+
+
+        .contact-form {
+            
+            max-width: 736px;
+            height: auto;
+            background-color:rgba(247, 247, 247, 1);
+            border-radius: 18px;
+            padding: 23px 74px;
+
+            @include tablet {
+                max-width: 100%;
+            }
+
+            @include mobile {
+                padding: 20px 20px;
+            }
+            
+            .form {
+                h4 {
+                    font-size: 16px;
+                }
+                
+                display: flex;
+                padding-top: 30px;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 30px;
+                &__pole {
+                    display:flex;
+                    flex-direction: column;
+                    flex: 0 1 calc(50% - 15px);
+                    gap: 8px;
+                    
+                    label {
+                        font-size: 16px;
+                    }
+                    
+                    input, textarea  {
+                        border: 1px solid rgba(217, 217, 217, 1);
+                        border-radius: 8px;
+                        padding: 12px 16px;
+                        width: 100%;
+                        resize: none;
+                        
+                    }
+                    &:nth-last-child(2) {
+                        flex: 1 1 100%;
+                        textarea  {
+                            width: 100%;
+                            min-height: 150px;
+                            font-family: "InterR";
+                        }
+                    }
+                    @include mobile {
+                        flex: 1 1 100%;
+                    }
+                }
+                button {
+                    width: 100%;
+                    height: 40px;
+                    border-radius: 8px;
+                    border: none;
+                    background-color: $lightOrange;
+                    color: white;
+                }
+            }
+        }
+    }
+
+
+
+}

@@ -6,7 +6,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..auth.models import User
-from ..auth.schemas import UserInCreate
+from ..auth.schemas import UserInCreate, UserOutput, UserInLogin, UserWithToken
 
 from ..config import settings
 
@@ -37,7 +37,8 @@ class AuthHandler():
     def sign_jwt(user_id:int, is_admin: bool): #генерация jwt токена на 15 минут
         payload = {
                 "user_id": user_id,
-                "expires": time.time()+ 900 #надо будет исправить
+                "expires": time.time()+ 900,#надо будет исправить
+                "is_admin": is_admin
         }
         token = jwt.encode(payload,JWT_SECRET_KEY,JWT_ALG)
         return token
@@ -50,7 +51,7 @@ class AuthHandler():
                 return decode_token
             else:
                 raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Истекло время жизни")
-        except:
+        except jwt.PyJWTError:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Невалидный токен")
 
 
@@ -80,5 +81,22 @@ async def get_user_by_id(session: AsyncSession, id: int):
 
 
 
+async def sign_up(session: AsyncSession, user_detail: UserInCreate) ->UserOutput:
+    if await user_exist_by_email(session, user_detail.email):
+        raise HTTPException(status_code=400, detail="Пользователь уже существует")
+    else:
+        hashed_password = HashHelper.get_password_hash(user_detail.password).decode("UTF-8")
+        user_detail.password = hashed_password
+        return await create_user(user_detail, session)
 
+async def login (session: AsyncSession, user_detail: UserInLogin):
+    user = await get_user_by_email(session, user_detail.email)
+    if user is None:
+        raise HTTPException(status_code=400, detail="Неверный email или пароль")
 
+    if HashHelper.verify_password(user_detail.password, user.password):
+        token = AuthHandler.sign_jwt(user.id, user.is_admin)
+        if token:
+            return UserWithToken(token=token)
+    else:
+        raise HTTPException(status_code=400, detail="Неверный email или пароль")

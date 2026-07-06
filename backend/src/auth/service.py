@@ -85,8 +85,8 @@ async def sign_up(session: AsyncSession, user_detail: UserInCreate) ->UserOutput
     if await user_exist_by_email(session, user_detail.email):
         raise HTTPException(status_code=400, detail="Пользователь уже существует")
     else:
-        hashed_password = HashHelper.get_password_hash(user_detail.password).decode("UTF-8")
-        user_detail.password = hashed_password
+        hashed_password = HashHelper.get_password_hash(user_detail.password_hash).decode("UTF-8")
+        user_detail.password_hash = hashed_password
         return await create_user(user_detail, session)
 
 async def login (session: AsyncSession, user_detail: UserInLogin):
@@ -94,7 +94,7 @@ async def login (session: AsyncSession, user_detail: UserInLogin):
     if user is None:
         raise HTTPException(status_code=400, detail="Неверный email или пароль")
 
-    if HashHelper.verify_password(user_detail.password, user.password):
+    if HashHelper.verify_password(user_detail.password, user.password_hash):
         token = AuthHandler.sign_jwt(user.id, user.is_admin)
         if token:
             return UserWithToken(token=token)

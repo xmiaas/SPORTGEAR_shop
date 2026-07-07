@@ -47,12 +47,9 @@ class AuthHandler():
     def decode_jwt(token: str) -> dict: #декодирование токена
         try:
             decode_token = jwt.decode(token, JWT_SECRET_KEY,algorithms=[JWT_ALG])
-            if decode_token["expires"] >= time.time():
-                return decode_token
-            else:
-                raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Истекло время жизни")
+            return decode_token if decode_token["expires"] >= time.time() else None
         except jwt.PyJWTError:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Невалидный токен")
+            return None
 
 
 

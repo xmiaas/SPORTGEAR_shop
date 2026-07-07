@@ -11,6 +11,7 @@ from alembic import context
 from src.database import Base, DATABASE_URL
 from src.products.models import Categories, Products
 from src.auth.models import User
+from src.orders.models import Cart
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

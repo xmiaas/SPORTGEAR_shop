@@ -40,15 +40,15 @@ async def add_to_cart(session: AsyncSession, product_from_user: ProductInfo, use
 
 
 
-async def remove_from_cart(session: AsyncSession, product_from_user: ProductInfo, user: CurrentUser):
-    product = await session.get(Products, product_from_user.id)
+async def remove_from_cart(session: AsyncSession, product_id: int, user: CurrentUser):
+    product = await session.get(Products, product_id)
     if not product:
         return None
 
     user_id = user.id
 
     result = await session.execute(select(Cart).where(
-        Cart.product_id == product_from_user.id,
+        Cart.product_id == product_id,
         Cart.user_id == user.id
     ))
     user_products = result.scalar_one_or_none()
@@ -64,7 +64,7 @@ async def remove_from_cart(session: AsyncSession, product_from_user: ProductInfo
 
     await session.commit()
 
-    return ProductReturn(id=product_from_user.id, count=new_count)
+    return ProductReturn(id=product_id, count=new_count)
 
 
 async def get_cart(session: AsyncSession, user:CurrentUser) -> List[CartItemsReturn]:

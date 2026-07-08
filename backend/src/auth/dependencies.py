@@ -11,7 +11,7 @@ from ..auth.schemas import UserOutput
 
 AUTH_PREFIX = "Bearer "
 
-async def get_current_user(session: DbSession, authorization: Annotated[str | None, Header()]) ->UserOutput:
+async def get_current_user(session: DbSession, authorization: Annotated[str | None, Header()] = None) ->UserOutput:
     auth_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Неверные данные аунтификации "
@@ -30,7 +30,8 @@ async def get_current_user(session: DbSession, authorization: Annotated[str | No
         if user:
             return UserOutput(id=user.id,
                           user_name=user.user_name,
-                          email=user.email
+                          email=user.email,
+                          is_admin=user.is_admin
                           )
         else:
             raise auth_exception
@@ -38,3 +39,11 @@ async def get_current_user(session: DbSession, authorization: Annotated[str | No
         raise auth_exception
 
 CurrentUser = Annotated[UserOutput,Depends(get_current_user)]
+
+async def get_current_admin(user: CurrentUser):
+    if user.is_admin:
+        return user
+    else:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+
+CurrentAdmin = Annotated[UserOutput, Depends(get_current_admin)]

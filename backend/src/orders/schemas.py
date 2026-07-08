@@ -11,4 +11,4 @@ class CartItemsReturn(ProductReturn):
     category: str
     description: str | None = Field(max_length=200, default=None)
     price: int
-    photo_link: str = Field(max_length=100)
+    photo_link: str | None = Field(max_length=100, default=None)

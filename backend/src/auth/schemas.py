@@ -10,6 +10,7 @@ class UserOutput(BaseModel):
     id: int
     user_name: str = Field(min_length=3, max_length=60)
     email: EmailStr = Field(max_length=100)
+    is_admin: bool | None = None
 
 class UserInUpdate(BaseModel):
     user_name: str | None = Field(min_length=3, max_length=60, default=None)

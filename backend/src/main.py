@@ -5,12 +5,14 @@ from fastapi import FastAPI
 from src.products.router import router as product_router
 from src.auth.router import authRouter
 from src.orders.router import basketRouter
+from src.admin.router import adminRouter
 
 app = FastAPI()
 
 app.include_router(product_router)
 app.include_router(authRouter)
 app.include_router(basketRouter)
+app.include_router((adminRouter))
 
 
 if __name__ == "__main__":

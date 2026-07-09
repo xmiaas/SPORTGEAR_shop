@@ -18,3 +18,9 @@ class Products(Base):
     photo_link: Mapped[str | None] = mapped_column(String(100))
 
     cart: Mapped[List["Cart"]] = relationship("Cart", back_populates="products")
+
+    @property
+    def get_cat_name(self):
+        if self.category:
+            return self.category.name
+        return ""

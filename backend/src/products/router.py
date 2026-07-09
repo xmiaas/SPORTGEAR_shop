@@ -1,3 +1,5 @@
+from http.client import HTTPException
+
 from fastapi import APIRouter
 
 from ..database import DbSession
@@ -16,4 +18,6 @@ async def get_all_products(session: DbSession):
 @router.get("/{product_id}", summary="Получить товар по id", response_model=ProductScheme)
 async def get_one_product(product_id:int, session: DbSession):
     result = await fetch_product_by_id(product_id, session)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Товар не найден ")
     return result

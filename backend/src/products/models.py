@@ -16,6 +16,7 @@ class Products(Base):
     description: Mapped[str | None] = mapped_column(String(200))
     price: Mapped[float] = mapped_column(Numeric(precision=10, scale=2))
     photo_link: Mapped[str | None] = mapped_column(String(100))
+    is_visible: Mapped[bool] = mapped_column(default=True, server_default="TRUE")
 
     cart: Mapped[List["Cart"]] = relationship("Cart", back_populates="products")
 

@@ -1,6 +1,6 @@
 from fastapi import UploadFile
 
-from ..admin.shemas import CreateItemDepends, UpdateItemDepends
+from ..admin.shemas import CreateItemDepends, UpdateItemDepends, CategoryName
 from ..products.models import Products, Categories
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -57,7 +57,7 @@ async def create_item(item: CreateItemDepends ,session: AsyncSession):
     return new_item
 
 
-async def update_item(item_update:UpdateItemDepends, item_id: int, session: AsyncSession):
+async def update_pr(item_update:UpdateItemDepends, item_id: int, session: AsyncSession):
     item = await session.get(Products, item_id)
     if not item:
          return None
@@ -106,13 +106,12 @@ async def get_cat_name(session: AsyncSession, cat_id: int):
     res = await session.get(Categories, cat_id)
     if res is None:
         return None
-    return res.name
+    return res
 
 async def get_all_cat(session: AsyncSession):
     res = await session.execute(select(Categories))
     cat = res.scalars().all()
-    names = [el.name for el in cat]
-    return names
+    return cat
 
 
 async def fetch_all_products(session: AsyncSession):
@@ -128,3 +127,18 @@ async def fetch_product_by_id(pr_id: int, session: AsyncSession):
     product = result.scalar_one_or_none()
     return product
 
+
+async def create_cat(session: AsyncSession, item: CategoryName):
+    new_item = Categories()
+    new_item.name = item.name
+    session.add(new_item)
+    await session.commit()
+    await session.refresh(new_item)
+    return new_item
+
+async def delete_cat(session: AsyncSession, cat_id: int):
+    result = await session.execute(delete(Categories).where(Categories.id == cat_id))
+    if result.rowcount == 0:
+        return False
+    await session.commit()
+    return True
